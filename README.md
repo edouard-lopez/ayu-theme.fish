@@ -10,7 +10,7 @@
 
 Edit `~/.config/fish/config.fish` to load a variant, _e.g._:
 
-    source $__fish_config_dir/conf.d/ayu-theme.fish/ayu-light.fish
+    source $__fish_config_dir/conf.d/ayu-light.fish
 
 ## Variants
 
