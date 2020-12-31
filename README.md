@@ -1,24 +1,30 @@
 # ayu-theme.fish
 
-> ayu color theme for Fish shell
+> [ayu](https://github.com/dempfi/ayu) color scheme for Fish shell
 
-## Light
+## Installation
+
+    fisher install edouard-lopez/ayu-theme.fish
+
+## Configuration
+
+Edit `~/.config/fish/config.fish` to load a variant, _e.g._:
+
+    source $__fish_config_dir/conf.d/ayu-theme.fish/ayu-light.fish
+
+## Variants
+
+### Light
 
 ![ayu-light.fish preview](./preview-ayu-light.fish.png)
 
-## Dark
+### Dark
 
 ![ayu-dark.fish preview](./preview-ayu-dark.fish.png)
 
-## Mirage
+### Mirage
 
 ![ayu-dark.fish preview](./preview-ayu-mirage.fish.png)
-
-## Usage
-
-1. Copy the file you :heart:
-2. Source it 🚀
-3. Enjoy!
 
 ## Credits
 
