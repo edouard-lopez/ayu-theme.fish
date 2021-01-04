@@ -10,8 +10,7 @@
 
 Declare the variant you want as a universal variable, _e.g._:
 
-    set --universal ayu_variant light
-    exec fish
+    set --universal ayu_variant light && ayu_load_theme
 
 ## Variants
 

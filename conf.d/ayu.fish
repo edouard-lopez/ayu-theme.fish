@@ -1,15 +1,27 @@
-set --query ayu_path || set --local ayu_path $__fish_config_dir
-switch $ayu_variant
-    case light
-        source $ayu_path/conf.d/ayu-light.fish && enable_ayu_theme_light
-    case dark
-        source $ayu_path/conf.d/ayu-dark.fish && enable_ayu_theme_dark
-    case mirage
-        source $ayu_path/conf.d/ayu-mirage.fish && enable_ayu_theme_mirage
+function ayu_load_theme
+    set --query ayu_path || set --local ayu_path $__fish_config_dir
+
+    switch $ayu_variant
+        case light
+            source $ayu_path/conf.d/ayu-light.fish && enable_ayu_theme_light
+            and colorize "Ayu %s light %s enabled!\n"
+        case dark
+            source $ayu_path/conf.d/ayu-dark.fish && enable_ayu_theme_dark
+            and colorize "Ayu %s dark %s enabled!\n"
+        case mirage
+            source $ayu_path/conf.d/ayu-mirage.fish && enable_ayu_theme_mirage
+            and colorize "Ayu %s mirage %s enabled!\n"
+        case '*'
+            echo '⚠️  Invalid variant, choose among: light, dark or mirage'
+    end
+end
+
+function colorize \
+    --argument-names text
+    printf $text (set_color $fish_color_quote --reverse) (set_color normal)
 end
 
 function _ayu_save_current_theme
-    set --query ayu_path || set --local ayu_path $__fish_config_dir
     set --local previous_theme_file $__fish_config_dir/functions/_ayu_restore_previous_theme.fish
     
     test -e $previous_theme_file && command rm -f $previous_theme_file
@@ -25,8 +37,8 @@ function _ayu_save_current_theme
 end
 
 function _ayu_install --on-event ayu_install
-    echo '_ayu_save_current_theme'
     _ayu_save_current_theme
+    and echo 'Previous theme saved! 🎉'
 end
 
 function _ayu_uninstall --on-event ayu_uninstall
@@ -39,4 +51,13 @@ function _ayu_uninstall --on-event ayu_uninstall
     command rm -f $previous_theme_file
     functions --erase _ayu_restore_previous_theme
     set --erase ayu_variant
+end
+
+function ayu_display_colorscheme
+    set color_vars (set --names | grep fish_color)
+    for color_var in $color_vars
+        printf "%-30s %s\n" \
+            $color_var \
+            (set_color $$color_var --reverse)"$$color_var"(set_color normal)
+    end
 end
