@@ -8,9 +8,9 @@
 
 ## Configuration
 
-Edit `~/.config/fish/config.fish` to load a variant, _e.g._:
+Declare the variant you want as a universal variable, _e.g._:
 
-    source $__fish_config_dir/conf.d/ayu-light.fish
+    set --universal ayu_variant light && ayu_load_theme
 
 ## Variants
 
